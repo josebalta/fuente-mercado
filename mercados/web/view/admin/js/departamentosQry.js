@@ -16,7 +16,7 @@ function departamentosCbo() {
 
             } else {
                 $("#departamentosCbo").html(data);
-                //
+                
                 departamentosQry();
             }
         }
