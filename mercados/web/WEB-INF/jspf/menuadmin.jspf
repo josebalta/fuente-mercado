@@ -1,0 +1,44 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<div id="cssmenu">
+    <ul>
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/wrench.png"/></span><span> Matenimientos</span></span></a>
+            <ul>
+                <li class='last'><a href='usuariosQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/group_key.png"/></span><span> Usuarios</span></a></li>
+                <li class='last'><a href='departamentosQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Departamentos</span></a></li>
+                
+                <li class='last'><a href='provinciasQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Región / Provincias</span></a></li>
+                <li class='last'><a href='zonasQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Zonas</span></a></li>
+                <li class='last'><a href='distritosQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Distritos</span></a></li>
+                <li class='last'><a href='mercadosQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Mercados</span></a></li>                
+                <li class='last'><a href='productosQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/package.png"/></span><span> Productos</span></a></li>
+                <li class='last'><a href='vendedoresQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/client.png"/></span><span> Vendedores</span></a></li>
+                <li class='last'><a href='clientesQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/empresa.png"/></span><span> Clientes</span></a></li>
+            </ul>
+        </li>
+        
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/shape_align_bottom.png"/></span><span> Movimientos </span></span></a>
+            <ul>
+                <li><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/tutoriales.png"/></span><span> Ventas</span></a></li>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/tutoriales.png"/></span><span> Cobranzas</span></a></li>
+            </ul>
+        </li>
+        
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/eart.png"/></span><span> jQuery</span></span></a>
+            <ul>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/calendar.png"/></span><span> DatePicker</span></a></li>
+            </ul>
+        </li>
+
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/upload.png"/></span><span> FileUpload </span></span></a>
+            <ul>
+                <li><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/dbadd.png"/></span><span> En Base de Datos</span></a></li>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/pc.png"/></span><span> En Disco Duro</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

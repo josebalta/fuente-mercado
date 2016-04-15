@@ -1,0 +1,10 @@
+a.parainfo:active, a.parainfo:link, a.parainfo:visited {
+    font-weight: bold;
+    text-decoration: none;
+    color: #215982;
+}
+
+a.parainfo:hover {
+    text-decoration: underline;
+    color: #4179a2;
+}

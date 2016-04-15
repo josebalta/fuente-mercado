@@ -1,0 +1,41 @@
+table.parainfo {
+    border-collapse: collapse;
+}
+
+table.parainfo caption {
+    padding: 6px 12px;
+    text-align: left;
+}
+
+table.parainfo thead td, table.parainfo thead th,
+table.parainfo tfoot td, table.parainfo tfoot th {
+    padding: 4px 8px;
+}
+
+table.parainfo tbody td, table.parainfo tbody th {
+    padding: 2px 8px;
+}
+
+table.parainfo th.crud, table.parainfo td.crud {
+    width: 20px;
+}
+
+table.parainfo a img {
+    border: none;
+}
+
+table.parainfo td, table.parainfo th {
+    border: 1px solid #a6c9e2;
+}
+
+table.parainfo tbody tr:nth-of-type(odd) {
+    background-color: #fefefe;
+}
+
+table.parainfo tbody tr:nth-of-type(even) {
+    background-color: #ecf6ff;
+}
+
+table.parainfo tbody tr:hover {
+    background-color: #ffff80; 
+}

@@ -1,0 +1,36 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<div id="cssmenu">
+    <ul>
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/report.png"/></span><span> Reportes</span></span></a>
+            <ul>
+                <li><a href='#' onclick="#"><span class="menu_izq_sub"><img src="../../images/icons/chart.png"/></span><span> Reporte Gráfico</span></a></li>
+                <li><a href='#' onclick="#"><span class="menu_izq_sub"><img src="../../images/icons/pdf.png"/></span><span> Reporte PDF</span></a></li>
+                <li onclick="#"><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/cubes.png"/></span><span> Reporte Excel</span></a></li>
+                <li class='last' onclick="#"><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/ireport.png"/></span><span> Reporte iReport</span></a></li>
+            </ul>
+        </li>
+
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/js.png"/></span><span> Ajax</span></span></a>
+            <ul>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/cbo.png"/></span><span> Combos Anidados</span></a></li>
+            </ul>
+        </li>
+
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/mail.png"/></span><span> Correo</span></span></a>
+            <ul>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/woman.png"/></span><span> Envío de Email</span></a></li>
+            </ul>
+        </li>
+
+        <li class="has-sub">
+            <a href='#'><span><span class="menu_izq"><img src="../../images/icons/map.png"/></span><span> Google Maps</span></span></a>
+            <ul>
+                <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/map2.png"/></span><span> Ejemplo</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

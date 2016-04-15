@@ -1,0 +1,32 @@
+form.parainfo {
+
+}
+
+form.parainfo label, form.parainfo input, form.parainfo select, form.parainfo textarea{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #444;
+}
+
+form.parainfo input[type=text], form.parainfo input[type=password],
+form.parainfo textarea, form.parainfo select, form.parainfo button, select.parainfoo{
+    padding: 2px 4px;
+}
+
+form.parainfo legend {
+    padding: 4px 12px;
+}
+
+form.parainfo .tabla {
+    margin: auto;
+    margin-top: 16px;
+    border-spacing: 5px;
+}
+
+form.parainfo textarea {
+    resize: none;
+}
+
+form.parainfo td, form.parainfo th {
+    vertical-align: top;
+}

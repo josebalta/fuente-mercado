@@ -1,0 +1,12 @@
+<%@include file="browser.jspf" %>
+<%    Integer autorizacion = (Integer) session.getAttribute("autorizacion");
+    String ID = (String) session.getAttribute("ID");
+
+    if ((ID == null) || (autorizacion == null)
+            || (autorizacion != 1)
+            || (!ID.equals(session.getId()))) {
+
+        response.sendRedirect("../");
+    }
+%>
+
