@@ -7,8 +7,12 @@ package web.servlet;
 
 import dao.DaoDepartamentos;
 import dao.DaoDistritos;
+import dao.DaoProvincias;
+import dao.DaoZonas;
 import dao.impl.DaoDepartamentosImpl;
 import dao.impl.DaoDistritosImpl;
+import dao.impl.DaoProvinciasImpl;
+import dao.impl.DaoZonasImpl;
 import dto.Distritos;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,22 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import parainfo.convert.DeString;
 import web.validator.DistritosValidator;
 
-/**
- *
- * @author Jose
- */
 @WebServlet(name = "DistritoServlet", urlPatterns = {"/view/admin/Distritos"})
 public class DistritosServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -59,13 +50,14 @@ public class DistritosServlet extends HttpServlet {
             StringBuilder message = new StringBuilder();
             //
             DaoDistritos daoDistritos = new DaoDistritosImpl();
-            DaoDepartamentos daoDepartamentos = new DaoDepartamentosImpl();
+            DaoProvincias daoProvincias = new DaoProvinciasImpl();
+            DaoZonas daoZonas = new DaoZonasImpl();
             //
             final Integer filsXpag = 10;
 
             switch (accion) {
                 case "PROVINCIAS_CBO":
-                    List<Object[]> list = daoDepartamentos.departamentosCbo();
+                    List<Object[]> list = daoProvincias.provinciasCbo();
 
                     if (list != null) {
                         for (Object[] reg : list) {
@@ -78,6 +70,20 @@ public class DistritosServlet extends HttpServlet {
                     }
                     break;
 
+                case "ZONAS_CBO":
+                    list = daoZonas.zonasCbo();
+
+                    if (list != null) {
+                        for (Object[] reg : list) {
+                            message.append("<option value=\"").append(reg[0]).append("\">");
+                            message.append(reg[1]);
+                            message.append("</option>");
+                        }
+                    } else {
+                        result = "No se pudo realizar Consulta Zonas";
+                    }
+                    break;
+
                 case "QRY":
                     Integer numpag = DeString.aInteger(request.getParameter("numpag"));
                     list = daoDistritos.distritosQry(numpag, filsXpag);
@@ -85,7 +91,6 @@ public class DistritosServlet extends HttpServlet {
                     if (list != null) {
                         for (Object[] u : list) {
                             message.append("<tr>");
-                            message.append("<td>").append(u[4]).append("</td>");
                             message.append("<td>").append(u[3]).append("</td>");
                             message.append("<td>").append(u[2]).append("</td>");
                             message.append("<td colspan=\"2\">").append(u[1]).append("</td>");
@@ -147,6 +152,8 @@ public class DistritosServlet extends HttpServlet {
 
                         if (distritos != null) {
                             message.append(distritos.getIdprovincia())
+                                    .append("%%%")
+                                    .append(distritos.getIdzona())
                                     .append("%%%")
                                     .append(distritos.getNombre());
 

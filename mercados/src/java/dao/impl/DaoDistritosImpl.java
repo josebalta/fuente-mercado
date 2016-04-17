@@ -189,9 +189,10 @@ public class DaoDistritosImpl implements dao.DaoDistritos {
                 if (rs.next()) {
                     distritos = new Distritos();
 
-                    distritos.getIdprovincia(rs.getInt(1));
-                    distritos.getIdzona(rs.getInt(2));
-                    distritos.getNombre(rs.getString(3));
+                    distritos.setIddistrito(rs.getInt(1));
+                    distritos.setIdprovincia(rs.getInt(2));
+                    distritos.setIdzona(rs.getInt(3));
+                    distritos.setNombre(rs.getString(4));
 
                 } else {
                     throw new SQLException("ID no existe");

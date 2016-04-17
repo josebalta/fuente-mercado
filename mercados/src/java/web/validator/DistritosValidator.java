@@ -48,8 +48,9 @@ public class DistritosValidator {
 
         distritos.setIddistrito(iddistrito);
         distritos.setIdprovincia(idprovincia);
-        distritos.getIdzona(idzona);
+        distritos.setIdzona(idzona);
         distritos.setNombre(nombre);
+        
         return list;
     }
 

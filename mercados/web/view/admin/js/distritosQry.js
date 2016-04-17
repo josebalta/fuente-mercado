@@ -60,38 +60,56 @@ function distritosIns() {
             if (ok === "!Ok.") {
                 $("#msg_server").html(data.substring(4, data.length)).show();
 
-            } else {
+            } else { // exito
                 $("#idprovincia_ins").html(data);
-                $("#idzona_ins").html(data);
-                $("#nombre_ins").val("");
-                //
 
-                $("#dins").dialog({
-                    modal: true,
-                    width: 460,
-                    buttons: {
-                        "Cancelar": function () {
-                            $(this).dialog("close");
-                        },
-                        "Grabar": function () {
-                            $.ajax({
-                                url: "Distritos",
-                                type: "post",
-                                data: {
-                                    accion: "INS",
-                                    idprovincia: $("#idprovincia_ins").val(),
-                                    idzona: $("#idzona_ins").val(),
-                                    nombre: $("#nombre_ins").val()
-                                },
-                                success: function (data) {
-                                    var ok = data.substring(0, 4);
+                $.ajax({
+                    url: "Distritos",
+                    type: "post",
+                    data: {
+                        accion: "ZONAS_CBO" //,
+                                //idprovincia: $("#idprovincia_ins").val()
+                    },
+                    success: function (data) {
+                        var ok = data.substring(0, 4);
 
-                                    if (ok === "!Ok.") {
-                                        $("#error_ins").html(data.substring(4, data.length)).show();
+                        if (ok === "!Ok.") {
+                            $("#msg_server").html(data.substring(4, data.length)).show();
 
-                                    } else {
-                                        distritosCbo();
-                                        $("#dins").dialog("close");
+                        } else {
+                            $("#idzona_ins").html(data);
+
+                            $("#nombre_ins").val("");
+                            //
+                            $("#dins").dialog({
+                                modal: true,
+                                width: 460,
+                                buttons: {
+                                    "Cancelar": function () {
+                                        $(this).dialog("close");
+                                    },
+                                    "Grabar": function () {
+                                        $.ajax({
+                                            url: "Distritos",
+                                            type: "post",
+                                            data: {
+                                                accion: "INS",
+                                                idprovincia: $("#idprovincia_ins").val(),
+                                                idzona: $("#idzona_ins").val(),
+                                                nombre: $("#nombre_ins").val()
+                                            },
+                                            success: function (data) {
+                                                var ok = data.substring(0, 4);
+
+                                                if (ok === "!Ok.") {
+                                                    $("#error_ins").html(data.substring(4, data.length)).show();
+
+                                                } else {
+                                                    distritosCbo();
+                                                    $("#dins").dialog("close");
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });
@@ -153,7 +171,7 @@ function distritosDel() {
 
 function distritosUpd() {
     var id = $("input[name='iddistrito_upd']:checked").val();
-
+    
     if (isNaN(id)) {
         message("Advertencia", "Seleccione Fila para Actualizar Datos");
 
@@ -162,7 +180,7 @@ function distritosUpd() {
             url: "Distritos",
             type: "post",
             data: {
-                accion: "DEPARTAMENTOS_CBO"
+                accion: "PROVINCIAS_CBO"
             },
             success: function (data) {
                 var ok = data.substring(0, 4);
@@ -171,15 +189,14 @@ function distritosUpd() {
                     $("#msg_server").html(data.substring(4, data.length)).show();
 
                 } else {
-                    $("#iddepartamento_upd").html(data);
+                    $("#idprovincia_upd").html(data);
 
-                    //
                     $.ajax({
                         url: "Distritos",
                         type: "post",
                         data: {
-                            accion: "GET",
-                            iddistrito: id
+                            accion: "ZONAS_CBO" //,
+                                    //idprovincia: $("#idprovincia_ins").val()
                         },
                         success: function (data) {
                             var ok = data.substring(0, 4);
@@ -188,39 +205,59 @@ function distritosUpd() {
                                 $("#msg_server").html(data.substring(4, data.length)).show();
 
                             } else {
-                                var dato = data.split("%%%");
+                                $("#idzona_upd").html(data);
+                                //
+                                $.ajax({
+                                    url: "Distritos",
+                                    type: "post",
+                                    data: {
+                                        accion: "GET",
+                                        iddistrito: id
+                                    },
+                                    success: function (data) { 
+                                        var ok = data.substring(0, 4);
+                                                                
 
-                                $("#idprovincia_upd").val(dato[0]);
-                                $("#idzona_upd").val(dato[1]);
-                                $("#nombre_upd").val(dato[2]);
+                                        if (ok === "!Ok.") {
+                                            $("#msg_server").html(data.substring(4, data.length)).show();
 
-                                $("#dupd").dialog({
-                                    modal: true,
-                                    width: 460,
-                                    buttons: {
-                                        "Cancelar": function () {
-                                            $(this).dialog("close");
-                                        },
-                                        "Grabar": function () {
-                                            $.ajax({
-                                                url: "Distritos",
-                                                type: "post",
-                                                data: {
-                                                    accion: "UPD",
-                                                    iddistrito: id,
-                                                    idprovincia: $("#idprovincia_upd").val(),
-                                                    idzona: $("#idzona_upd").val(),
-                                                    nombre: $("#nombre_upd").val()
-                                                },
-                                                success: function (data) {
-                                                    var ok = data.substring(0, 4);
+                                        } else {
+                                            var dato = data.split("%%%");
 
-                                                    if (ok === "!Ok.") {
-                                                        $("#error_upd").html(data.substring(4, data.length)).show();
+                                            $("#idprovincia_upd").val(dato[0]);
+                                            $("#idzona_upd").val(dato[1]);
+                                            $("#nombre_upd").val(dato[2]);
 
-                                                    } else {
-                                                        distritosCbo();
-                                                        $("#dupd").dialog("close");
+                                            $("#dupd").dialog({
+                                                modal: true,
+                                                width: 460,
+                                                buttons: {
+                                                    "Cancelar": function () {
+                                                        $(this).dialog("close");
+                                                    },
+                                                    "Grabar": function () {
+                                                        $.ajax({
+                                                            url: "Distritos",
+                                                            type: "post",
+                                                            data: { 
+                                                                accion: "UPD",
+                                                                iddistrito: id,
+                                                                idprovincia: $("#idprovincia_upd").val(),
+                                                                idzona: $("#idzona_upd").val(),
+                                                                nombre: $("#nombre_upd").val()
+                                                            },
+                                                            success: function (data) {
+                                                                var ok = data.substring(0, 4);
+   
+                                                                if (ok === "!Ok.") {
+                                                                    $("#error_upd").html(data.substring(4, data.length)).show();
+
+                                                                } else {
+                                                                    distritosCbo();
+                                                                    $("#dupd").dialog("close");
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                 }
                                             });
