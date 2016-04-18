@@ -6,8 +6,12 @@
 package web.servlet;
 
 import dao.DaoDepartamentos;
+import dao.DaoDistritos;
+import dao.DaoEstados;
 import dao.DaoMercados;
 import dao.impl.DaoDepartamentosImpl;
+import dao.impl.DaoDistritosImpl;
+import dao.impl.DaoEstadosImpl;
 import dao.impl.DaoMercadosImpl;
 import dto.Mercados;
 import java.io.IOException;
@@ -59,13 +63,14 @@ public class MercadosServlet extends HttpServlet {
             StringBuilder message = new StringBuilder();
             //
             DaoMercados daoMercados = new DaoMercadosImpl();
-            DaoDepartamentos daoDepartamentos = new DaoDepartamentosImpl();
+            DaoDistritos daoDistritos = new DaoDistritosImpl();
+            DaoEstados daoEstados = new DaoEstadosImpl();
             //
             final Integer filsXpag = 10;
 
             switch (accion) {
                 case "DISTRITOS_CBO":
-                    List<Object[]> list = daoDepartamentos.departamentosCbo();
+                    List<Object[]> list = daoDistritos.distritosCbo();
 
                     if (list != null) {
                         for (Object[] reg : list) {
@@ -74,7 +79,21 @@ public class MercadosServlet extends HttpServlet {
                             message.append("</option>");
                         }
                     } else {
-                        result = "No se pudo realizar Consulta Departamentos";
+                        result = "No se pudo realizar Consulta a Distritos";
+                    }
+                    break;
+                    
+                case "ESTADOS_CBO":
+                    list = daoEstados.estadosCbo();
+
+                    if (list != null) {
+                        for (Object[] reg : list) {
+                            message.append("<option value=\"").append(reg[0]).append("\">");
+                            message.append(reg[1]);
+                            message.append("</option>");
+                        }
+                    } else {
+                        result = "No se pudo realizar Consulta Zonas";
                     }
                     break;
 
@@ -85,11 +104,11 @@ public class MercadosServlet extends HttpServlet {
                     if (list != null) {
                         for (Object[] u : list) {
                             message.append("<tr>");
-                            message.append("<td>").append(u[5]).append("</td>");
-                            message.append("<td>").append(u[4]).append("</td>");
-                            message.append("<td>").append(u[3]).append("</td>");
+                            message.append("<td>").append(u[1]).append("</td>");
                             message.append("<td>").append(u[2]).append("</td>");
-                            message.append("<td colspan=\"2\">").append(u[1]).append("</td>");
+                            message.append("<td>").append(u[3]).append("</td>");
+                            message.append("<td>").append(u[4]).append("</td>");
+                            message.append("<td colspan=\"2\">").append(u[5]).append("</td>");
                             message.append("<td>").append("<input type=\"checkbox\" name=\"idmercado_del\" value=\"").append(u[0]).append("\"/>").append("</td>");
                             message.append("<td>").append("<input type=\"radio\" name=\"idmercado_upd\" value=\"").append(u[0]).append("\"/>").append("</td>");
                             message.append("</tr>");

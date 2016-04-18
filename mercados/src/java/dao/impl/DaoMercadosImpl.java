@@ -38,6 +38,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
                 .append("mercados.abreviado, ")
                 .append("mercados.nombre, ")
                 .append("mercados.direccion, ")
+                .append("distritos.nombre, ")
                 .append("estados.descripcion ")
                 .append("FROM mercados ")
                 .append("INNER JOIN distritos ")
@@ -58,13 +59,14 @@ public class DaoMercadosImpl implements dao.DaoMercados {
                 list = new ArrayList<>();
 
                 while (rs.next()) { // filas de consulta
-                    Object[] u = new Object[3];
+                    Object[] u = new Object[6];
 
                     u[0] = rs.getInt(1);
                     u[1] = rs.getString(2);
                     u[2] = rs.getString(3);
                     u[3] = rs.getString(4);
-                    u[4] = rs.getShort(5);
+                    u[4] = rs.getString(5);
+                    u[5] = rs.getString(6);
 
                     list.add(u);
                 }
@@ -112,7 +114,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
     @Override
     public String mercadosIns(Mercados mercados) {
         sql.delete(0, sql.length())
-                .append("INSERT INTO mercados (iddistrito, abreviado, nombre, direccion, estado) VALUES(?,?,?,?,?)");
+                .append("INSERT INTO mercados (iddistrito, abreviado, nombre, direccion, idestado) VALUES(?,?,?,?,?)");
 
         try (Connection cn = db.getConnection();
                 PreparedStatement ps = cn.prepareStatement(sql.toString())) {
@@ -121,7 +123,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
             ps.setString(2, mercados.getAbreviado());
             ps.setString(3, mercados.getNombre());
             ps.setString(4, mercados.getDireccion());
-            ps.setInt(5, mercados.getIdestado());
+            ps.setShort(5, mercados.getIdestado());
 
             int ctos = ps.executeUpdate();
             if (ctos == 0) {
@@ -226,7 +228,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
             ps.setString(2, mercados.getAbreviado());
             ps.setString(3, mercados.getNombre());
             ps.setString(4, mercados.getDireccion());
-            ps.setInt(5, mercados.getIdestado());
+            ps.setShort(5, mercados.getIdestado());
             ps.setInt(6, mercados.getIdmercado());
 
             int ctos = ps.executeUpdate();

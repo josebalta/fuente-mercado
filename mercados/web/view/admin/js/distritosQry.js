@@ -105,8 +105,8 @@ function distritosIns() {
                                                     $("#error_ins").html(data.substring(4, data.length)).show();
 
                                                 } else {
-                                                    distritosCbo();
                                                     $("#dins").dialog("close");
+                                                    distritosCbo();
                                                 }
                                             }
                                         });

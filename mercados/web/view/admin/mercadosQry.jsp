@@ -37,7 +37,7 @@
         </div>
 
         <div class="ui-layout-center" style="padding-top: 30px">
-            <table class="parainfo" style="margin: auto;width: 500px">
+            <table class="parainfo" style="margin: auto;width: 600px">
                 <caption>
                     <div style="float: left">Lista de Mercados</div>
                     <div style="float: right">
@@ -50,8 +50,8 @@
                     <tr>
                         <td>Abreviatura</td>
                         <td>Nombre</td>
-                        <td>Distrito</td>
                         <td>Direcci&oacute;n</td>
+                        <td>Distrito</td>
                         <td>Estado</td>
                         <th class="crud">
                             <a class="ins" href="#" onclick="mercadosIns();"

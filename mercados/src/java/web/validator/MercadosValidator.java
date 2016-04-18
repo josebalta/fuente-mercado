@@ -34,14 +34,11 @@ public class MercadosValidator {
         Integer iddistrito = DeString.aInteger(request.getParameter("iddistrito"));
         String abreviatura = request.getParameter("abreviatura");
         String nombre = request.getParameter("nombre");
+        String direccion = request.getParameter("direccion");
         Short idestado = DeString.aShort(request.getParameter("idestado"));
 
         if (upd && (idmercado == null)) {
             list.add("ID Mercado Incorrecto");
-        }
-
-        if (iddistrito == null) {
-            list.add("Seleccione Distrito");
         }
 
         if ((abreviatura == null) || (abreviatura.trim().length() == 0)) {
@@ -51,6 +48,10 @@ public class MercadosValidator {
         if ((nombre == null) || (nombre.trim().length() == 0)) {
             list.add("Ingrese nombre");
         }
+        
+        if (iddistrito == null) {
+            list.add("Seleccione Distrito");
+        }
 
         if (idestado == null) {
             list.add("Seleccione Estado");
@@ -59,6 +60,7 @@ public class MercadosValidator {
         mercados.setIddistrito(iddistrito);
         mercados.setAbreviado(abreviatura);
         mercados.setNombre(nombre);
+        mercados.setDireccion(direccion);
         mercados.setIdestado(idestado);
         return list;
     }

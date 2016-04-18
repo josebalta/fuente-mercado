@@ -5,11 +5,9 @@
  */
 package web.servlet;
 
-import dao.DaoDepartamentos;
 import dao.DaoDistritos;
 import dao.DaoProvincias;
 import dao.DaoZonas;
-import dao.impl.DaoDepartamentosImpl;
 import dao.impl.DaoDistritosImpl;
 import dao.impl.DaoProvinciasImpl;
 import dao.impl.DaoZonasImpl;

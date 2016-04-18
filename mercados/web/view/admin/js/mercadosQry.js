@@ -1,7 +1,6 @@
 $(function () {
     mercadosCbo();
 });
-
 function mercadosCbo() {
     $.ajax({
         url: "Mercados",
@@ -10,10 +9,8 @@ function mercadosCbo() {
         },
         success: function (data) {
             var ok = data.substring(0, 4);
-
             if (ok === "!Ok.") {
                 $("#msg_server").html(data.substring(4, data.length)).show();
-
             } else {
                 $("#mercadosCbo").html(data);
                 //
@@ -32,10 +29,8 @@ function mercadosQry() {
         },
         success: function (data) {
             var ok = data.substring(0, 4);
-
             if (ok === "!Ok.") {
                 $("#msg_server").html(data.substring(4, data.length)).show();
-
             } else {
                 $("#mercadosQry").html(data);
             }
@@ -44,7 +39,7 @@ function mercadosQry() {
 }
 
 function mercadosIns() {
-    // limpiando
+// limpiando
     $("#error_ins").html("").hide();
     $("#abreviatura_ins").val("");
     $("#nombre_ins").val("");
@@ -54,7 +49,7 @@ function mercadosIns() {
         url: "Mercados",
         type: "post",
         data: {
-            accion: "DEPARTAMENTOS_CBO"
+            accion: "DISTRITOS_CBO"
         },
         success: function (data) {
             var ok = data.substring(0, 4);
@@ -62,43 +57,61 @@ function mercadosIns() {
             if (ok === "!Ok.") {
                 $("#msg_server").html(data.substring(4, data.length)).show();
 
-            } else {
-                $("#iddepartamento_ins").html(data);
+            } else {  // exito		
                 $("#abreviatura_ins").val("");
                 $("#nombre_ins").val("");
-                $("#iddistrito_ins").val("");
                 $("#direccion_ins").val("");
+                $("#iddistrito_ins").html(data);
                 $("#idestado_ins").val("");
-                //
 
-                $("#dins").dialog({
-                    modal: true,
-                    width: 460,
-                    buttons: {
-                        "Cancelar": function () {
-                            $(this).dialog("close");
-                        },
-                        "Grabar": function () {
-                            $.ajax({
-                                url: "Mercados",
-                                type: "post",
-                                data: {
-                                    accion: "INS",
-                                    abreviatura: $("#abreviatura_ins").val(),
-                                    nombre: $("#nombre_ins").val(),
-                                    iddistrito: $("#iddistrito_ins").val(),
-                                    direccion: $("#direccion_ins").val(),
-                                    idestado: $("#idestado_ins").val()
-                                },
-                                success: function (data) {
-                                    var ok = data.substring(0, 4);
+                $.ajax({
+                    url: "Mercados",
+                    type: "post",
+                    data: {
+                        accion: "ESTADOS_CBO" //,
+                    },
+                    success: function (data) {
+                        var ok = data.substring(0, 4);
 
-                                    if (ok === "!Ok.") {
-                                        $("#error_ins").html(data.substring(4, data.length)).show();
+                        if (ok === "!Ok.") {
+                            $("#msg_server").html(data.substring(4, data.length)).show();
 
-                                    } else {
-                                        mercadosCbo();
-                                        $("#dins").dialog("close");
+                        } else {
+                            $("#idestado_ins").html(data);
+
+                            //
+                            $("#dins").dialog({
+                                modal: true,
+                                width: 460,
+                                buttons: {
+                                    "Cancelar": function () {
+                                        $(this).dialog("close");
+                                    },
+                                    "Grabar": function () {
+                                        $.ajax({
+                                            url: "Mercados",
+                                            type: "post",
+                                            data: {
+                                                accion: "INS",
+                                                abreviatura: $("#abreviatura_ins").val(),
+                                                nombre: $("#nombre_ins").val(),
+                                                direccion: $("#direccion_ins").val(),
+                                                iddistrito: $("#iddistrito_ins").val(),
+                                                idestado: $("#idestado_ins").val()
+                                                
+                                            },
+                                            success: function (data) {
+                                                var ok = data.substring(0, 4);
+
+                                                if (ok === "!Ok.") {
+                                                    $("#error_ins").html(data.substring(4, data.length)).show();
+                                                    
+                                                } else {
+                                                    $("#dins").dialog("close");
+                                                    mercadosCbo();
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });
@@ -110,16 +123,14 @@ function mercadosIns() {
     });
 }
 
+
 function mercadosDel() {
     var ids = [];
-
     $("input[name='idmercado_del']:checked").each(function () {
         ids.push($(this).val());
     });
-
     if (ids.length === 0) {
         message("Advertencia", "Seleccione fila(s) a Retirar");
-
     } else {
         $("#p_message").html("¿Retirar registro(s)?");
         $("#dlg_message").dialog({
@@ -132,7 +143,6 @@ function mercadosDel() {
                 },
                 "Si": function () {
                     $(this).dialog("close");
-
                     $.ajax({
                         url: "Mercados",
                         type: "post",
@@ -142,10 +152,8 @@ function mercadosDel() {
                         },
                         success: function (data) {
                             var ok = data.substring(0, 4);
-
                             if (ok === "!Ok.") {
                                 $("#msg_server").html(data.substring(4, data.length)).show();
-
                             } else {
                                 $("#dlg_message").dialog("close");
                                 mercadosCbo();
@@ -160,10 +168,8 @@ function mercadosDel() {
 
 function mercadosUpd() {
     var id = $("input[name='idmercado_upd']:checked").val();
-
     if (isNaN(id)) {
         message("Advertencia", "Seleccione Fila para Actualizar Datos");
-
     } else {
         $.ajax({
             url: "Mercados",
@@ -173,13 +179,10 @@ function mercadosUpd() {
             },
             success: function (data) {
                 var ok = data.substring(0, 4);
-
                 if (ok === "!Ok.") {
                     $("#msg_server").html(data.substring(4, data.length)).show();
-
                 } else {
                     $("#iddepartamento_upd").html(data);
-
                     //
                     $.ajax({
                         url: "Mercados",
@@ -190,19 +193,15 @@ function mercadosUpd() {
                         },
                         success: function (data) {
                             var ok = data.substring(0, 4);
-
                             if (ok === "!Ok.") {
                                 $("#msg_server").html(data.substring(4, data.length)).show();
-
                             } else {
                                 var dato = data.split("%%%");
-
                                 $("#abreviatura_upd").val(dato[0]);
                                 $("#nombre_upd").val(dato[1]);
                                 $("#iddistrito_upd").val(dato[2]);
                                 $("#direccion_upd").val(dato[3]);
                                 $("#idestado_upd").val(dato[4]);
-
                                 $("#dupd").dialog({
                                     modal: true,
                                     width: 460,
@@ -225,10 +224,8 @@ function mercadosUpd() {
                                                 },
                                                 success: function (data) {
                                                     var ok = data.substring(0, 4);
-
                                                     if (ok === "!Ok.") {
                                                         $("#error_upd").html(data.substring(4, data.length)).show();
-
                                                     } else {
                                                         mercadosCbo();
                                                         $("#dupd").dialog("close");
