@@ -5,13 +5,11 @@
  */
 package web.servlet;
 
-import dao.DaoDistritos;
 import dao.DaoEstados;
-import dao.DaoMercados;
-import dao.impl.DaoDistritosImpl;
+import dao.DaoProductos;
 import dao.impl.DaoEstadosImpl;
-import dao.impl.DaoMercadosImpl;
-import dto.Mercados;
+import dao.impl.DaoProductosImpl;
+import dto.Productos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,25 +19,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import parainfo.convert.DeString;
-import web.validator.MercadosValidator;
+import web.validator.ProductosValidator;
 
 /**
  *
  * @author Jose
  */
-@WebServlet(name = "MercadosServlet", urlPatterns = {"/view/admin/Mercados"})
-public class MercadosServlet extends HttpServlet {
+@WebServlet(name = "ProductosServlet", urlPatterns = {"/view/admin/Productos"})
+public class ProductosServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
 
         Integer idrol = (Integer) request.getSession().getAttribute("autorizacion");
@@ -60,29 +50,14 @@ public class MercadosServlet extends HttpServlet {
             String target = null;
             StringBuilder message = new StringBuilder();
             //
-            DaoMercados daoMercados = new DaoMercadosImpl();
-            DaoDistritos daoDistritos = new DaoDistritosImpl();
+            DaoProductos daoProductos = new DaoProductosImpl();
             DaoEstados daoEstados = new DaoEstadosImpl();
             //
             final Integer filsXpag = 10;
 
             switch (accion) {
-                case "DISTRITOS_CBO":
-                    List<Object[]> list = daoDistritos.distritosCbo();
-
-                    if (list != null) {
-                        for (Object[] reg : list) {
-                            message.append("<option value=\"").append(reg[0]).append("\">");
-                            message.append(reg[1]);
-                            message.append("</option>");
-                        }
-                    } else {
-                        result = "No se pudo realizar Consulta a Distritos";
-                    }
-                    break;
-
                 case "ESTADOS_CBO":
-                    list = daoEstados.estadosCbo();
+                    List<Object[]> list = daoEstados.estadosCbo();
 
                     if (list != null) {
                         for (Object[] reg : list) {
@@ -91,33 +66,31 @@ public class MercadosServlet extends HttpServlet {
                             message.append("</option>");
                         }
                     } else {
-                        result = "No se pudo realizar Consulta Zonas";
+                        result = "No se pudo realizar Consulta Estados";
                     }
                     break;
 
                 case "QRY":
                     Integer numpag = DeString.aInteger(request.getParameter("numpag"));
-                    list = daoMercados.mercadosQry(numpag, filsXpag);
+                    list = daoProductos.productosQry(numpag, filsXpag);
 
                     if (list != null) {
                         for (Object[] u : list) {
                             message.append("<tr>");
                             message.append("<td>").append(u[1]).append("</td>");
                             message.append("<td>").append(u[2]).append("</td>");
-                            message.append("<td>").append(u[3]).append("</td>");
-                            message.append("<td>").append(u[4]).append("</td>");
-                            message.append("<td colspan=\"2\">").append(u[5]).append("</td>");
-                            message.append("<td>").append("<input type=\"checkbox\" name=\"idmercado_del\" value=\"").append(u[0]).append("\"/>").append("</td>");
-                            message.append("<td>").append("<input type=\"radio\" name=\"idmercado_upd\" value=\"").append(u[0]).append("\"/>").append("</td>");
+                            message.append("<td colspan=\"2\">").append(u[3]).append("</td>");
+                            message.append("<td>").append("<input type=\"checkbox\" name=\"idproducto_del\" value=\"").append(u[0]).append("\"/>").append("</td>");
+                            message.append("<td>").append("<input type=\"radio\" name=\"idproducto_upd\" value=\"").append(u[0]).append("\"/>").append("</td>");
                             message.append("</tr>");
                         }
                     } else {
-                        result = "No se pudo realizar Consulta Mercados";
+                        result = "No se pudo realizar Consulta Productos";
                     }
                     break;
 
                 case "PAGS":
-                    Integer[] ctasPagsFils = daoMercados.ctasPaginas(filsXpag);
+                    Integer[] ctasPagsFils = daoProductos.ctasPaginas(filsXpag);
 
                     if (ctasPagsFils != null) {
                         for (int i = 0; i < ctasPagsFils[0]; i++) {
@@ -126,17 +99,17 @@ public class MercadosServlet extends HttpServlet {
                             message.append("</option>");
                         }
                     } else {
-                        result = "No se pudo realizar Consulta Departamentos";
+                        result = "No se pudo realizar Consulta Estados";
                     }
                     break;
 
                 case "INS":
-                    Mercados mercados = new Mercados();
-                    MercadosValidator validator = new MercadosValidator();
-                    List<String> list_msg = validator.valida(request, mercados, false);
+                    Productos productos = new Productos();
+                    ProductosValidator validator = new ProductosValidator();
+                    List<String> list_msg = validator.valida(request, productos, false);
 
                     if (list_msg.isEmpty()) {
-                        result = daoMercados.mercadosIns(mercados);
+                        result = daoProductos.productosIns(productos);
 
                     } else {
                         message.append("!Ok.<ol>");
@@ -153,43 +126,39 @@ public class MercadosServlet extends HttpServlet {
                     if (ids == null) {
                         result = "Lista de ID(s) incorrecta";
                     } else {
-                        result = daoMercados.mercadosDel(ids);
+                        result = daoProductos.productosDel(ids);
                     }
                     break;
 
                 case "GET":
-                    Integer idmercado = DeString.aInteger(request.getParameter("idmercado"));
+                    Integer idproducto = DeString.aInteger(request.getParameter("idproducto"));
 
-                    if (idmercado != null) {
-                        mercados = daoMercados.mercadosGet(idmercado);
+                    if (idproducto != null) {
+                        productos = daoProductos.productosGet(idproducto);
 
-                        if (mercados != null) {
-                            message.append(mercados.getAbreviado())
+                        if (productos != null) {
+                            message.append(productos.getDescripcion())
                                     .append("%%%")
-                                    .append(mercados.getNombre())
+                                    .append(productos.getPreciounitario())
                                     .append("%%%")
-                                    .append(mercados.getIddistrito())
-                                    .append("%%%")
-                                    .append(mercados.getDireccion())
-                                    .append("%%%")
-                                    .append(mercados.getIdestado());
+                                    .append(productos.getIdestado());
 
                         } else {
-                            result = "Mercado no Existe";
+                            result = "Producto no Existe";
                         }
 
                     } else {
-                        result = "ID Mercado incorrecto";
+                        result = "ID Producto incorrecto";
                     }
                     break;
 
                 case "UPD":
-                    mercados = new Mercados();
-                    validator = new MercadosValidator();
-                    list_msg = validator.valida(request, mercados, true);
+                    productos = new Productos();
+                    validator = new ProductosValidator();
+                    list_msg = validator.valida(request, productos, true);
 
                     if (list_msg.isEmpty()) {
-                        result = daoMercados.mercadosUpd(mercados);
+                        result = daoProductos.productosUpd(productos);
 
                     } else {
                         message.append("!Ok.<ol>");
@@ -217,15 +186,13 @@ public class MercadosServlet extends HttpServlet {
                 try (PrintWriter out = response.getWriter()) {
                     out.print(message);
                 }
-
             } else {
                 response.sendRedirect(target);
             }
         }
-
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="doGet y doPost">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
