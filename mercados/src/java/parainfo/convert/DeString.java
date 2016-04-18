@@ -1,5 +1,8 @@
 package parainfo.convert;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class DeString {
 
         return result;
     }
-    
+
     /**
      *
      * @param s
@@ -46,6 +49,18 @@ public class DeString {
         try {
             result = Short.valueOf(s);
         } catch (NumberFormatException ex) {
+        }
+
+        return result;
+    }
+
+    public static Date aDate(String s) throws ParseException {
+        Date result = null;
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            result = (Date) formatoDelTexto.parse(s);
+
+        } catch (ParseException ex) {
         }
 
         return result;
@@ -77,4 +92,3 @@ public class DeString {
         return list;
     }
 }
-
