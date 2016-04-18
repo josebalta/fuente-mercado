@@ -88,8 +88,8 @@ function provinciasIns() {
                                         $("#error_ins").html(data.substring(4, data.length)).show();
 
                                     } else {
-                                        provinciasCbo();
                                         $("#dins").dialog("close");
+                                        provinciasCbo();
                                     }
                                 }
                             });
@@ -215,8 +215,8 @@ function provinciasUpd() {
                                                         $("#error_upd").html(data.substring(4, data.length)).show();
 
                                                     } else {
-                                                        provinciasCbo();
                                                         $("#dupd").dialog("close");
+                                                        provinciasCbo();
                                                     }
                                                 }
                                             });

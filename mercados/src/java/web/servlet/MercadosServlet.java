@@ -82,7 +82,7 @@ public class MercadosServlet extends HttpServlet {
                         result = "No se pudo realizar Consulta a Distritos";
                     }
                     break;
-                    
+
                 case "ESTADOS_CBO":
                     list = daoEstados.estadosCbo();
 
@@ -166,9 +166,15 @@ public class MercadosServlet extends HttpServlet {
                         mercados = daoMercados.mercadosGet(idmercado);
 
                         if (mercados != null) {
-                            message.append(mercados.getIddistrito())
+                            message.append(mercados.getAbreviado())
                                     .append("%%%")
-                                    .append(mercados.getNombre());
+                                    .append(mercados.getNombre())
+                                    .append("%%%")
+                                    .append(mercados.getIddistrito())
+                                    .append("%%%")
+                                    .append(mercados.getDireccion())
+                                    .append("%%%")
+                                    .append(mercados.getIdestado());
 
                         } else {
                             result = "Mercado no Existe";

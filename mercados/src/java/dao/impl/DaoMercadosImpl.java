@@ -184,7 +184,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
                 .append("abreviado, ")
                 .append("nombre, ")
                 .append("direccion, ")
-                .append("estado ")
+                .append("idestado ")
                 .append("FROM mercados ")
                 .append("WHERE idmercado=?");
 
@@ -219,7 +219,7 @@ public class DaoMercadosImpl implements dao.DaoMercados {
     @Override
     public String mercadosUpd(Mercados mercados) {
         sql.delete(0, sql.length())
-                .append("UPDATE mercados SET iddistrito=?, abreviado=?, nombre=?, direccion=?, estado=? WHERE idmercado=?");
+                .append("UPDATE mercados SET iddistrito=?, abreviado=?, nombre=?, direccion=?, idestado=? WHERE idmercado=?");
 
         try (Connection cn = db.getConnection();
                 PreparedStatement ps = cn.prepareStatement(sql.toString())) {

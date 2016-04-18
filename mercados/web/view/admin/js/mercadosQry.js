@@ -58,11 +58,11 @@ function mercadosIns() {
                 $("#msg_server").html(data.substring(4, data.length)).show();
 
             } else {  // exito		
-                $("#abreviatura_ins").val("");
-                $("#nombre_ins").val("");
-                $("#direccion_ins").val("");
+//                $("#abreviatura_ins").val("");
+//                $("#nombre_ins").val("");
+//                $("#direccion_ins").val("");
                 $("#iddistrito_ins").html(data);
-                $("#idestado_ins").val("");
+//                $("#idestado_ins").val("");
 
                 $.ajax({
                     url: "Mercados",
@@ -98,14 +98,14 @@ function mercadosIns() {
                                                 direccion: $("#direccion_ins").val(),
                                                 iddistrito: $("#iddistrito_ins").val(),
                                                 idestado: $("#idestado_ins").val()
-                                                
+
                                             },
                                             success: function (data) {
                                                 var ok = data.substring(0, 4);
 
                                                 if (ok === "!Ok.") {
                                                     $("#error_ins").html(data.substring(4, data.length)).show();
-                                                    
+
                                                 } else {
                                                     $("#dins").dialog("close");
                                                     mercadosCbo();
@@ -168,8 +168,10 @@ function mercadosDel() {
 
 function mercadosUpd() {
     var id = $("input[name='idmercado_upd']:checked").val();
+
     if (isNaN(id)) {
         message("Advertencia", "Seleccione Fila para Actualizar Datos");
+
     } else {
         $.ajax({
             url: "Mercados",
@@ -179,56 +181,81 @@ function mercadosUpd() {
             },
             success: function (data) {
                 var ok = data.substring(0, 4);
+
                 if (ok === "!Ok.") {
                     $("#msg_server").html(data.substring(4, data.length)).show();
+
                 } else {
-                    $("#iddepartamento_upd").html(data);
-                    //
+                    $("#iddistrito_upd").html(data);
+
                     $.ajax({
                         url: "Mercados",
                         type: "post",
                         data: {
-                            accion: "GET",
-                            idmercado: id
+                            accion: "ESTADOS_CBO"
                         },
                         success: function (data) {
                             var ok = data.substring(0, 4);
+
                             if (ok === "!Ok.") {
                                 $("#msg_server").html(data.substring(4, data.length)).show();
+
                             } else {
-                                var dato = data.split("%%%");
-                                $("#abreviatura_upd").val(dato[0]);
-                                $("#nombre_upd").val(dato[1]);
-                                $("#iddistrito_upd").val(dato[2]);
-                                $("#direccion_upd").val(dato[3]);
-                                $("#idestado_upd").val(dato[4]);
-                                $("#dupd").dialog({
-                                    modal: true,
-                                    width: 460,
-                                    buttons: {
-                                        "Cancelar": function () {
-                                            $(this).dialog("close");
-                                        },
-                                        "Grabar": function () {
-                                            $.ajax({
-                                                url: "Mercados",
-                                                type: "post",
-                                                data: {
-                                                    accion: "UPD",
-                                                    idmercado: id,
-                                                    abreviatura: $("#abreviatura_upd").val(),
-                                                    nombre: $("#nombre_upd").val(),
-                                                    iddistrito: $("#iddistrito_upd").val(),
-                                                    direccion: $("#direccion_upd").val(),
-                                                    idestado: $("#idestado_upd").val()
-                                                },
-                                                success: function (data) {
-                                                    var ok = data.substring(0, 4);
-                                                    if (ok === "!Ok.") {
-                                                        $("#error_upd").html(data.substring(4, data.length)).show();
-                                                    } else {
-                                                        mercadosCbo();
-                                                        $("#dupd").dialog("close");
+                                $("#idestado_upd").html(data);
+                                //
+                                $.ajax({
+                                    url: "Mercados",
+                                    type: "post",
+                                    data: {
+                                        accion: "GET",
+                                        idmercado: id
+                                    },
+                                    success: function (data) {
+                                        var ok = data.substring(0, 4);
+
+                                        if (ok === "!Ok.") {
+                                            $("#msg_server").html(data.substring(4, data.length)).show();
+
+                                        } else {
+                                            var dato = data.split("%%%");
+                                            $("#abreviatura_upd").val(dato[0]);
+                                            $("#nombre_upd").val(dato[1]);
+                                            $("#iddistrito_upd").val(dato[2]);
+                                            $("#direccion_udp").val(dato[3]);
+                                            $("#idestado_upd").val(dato[4]);
+
+                                            $("#dupd").dialog({
+                                                modal: true,
+                                                width: 460,
+                                                buttons: {
+                                                    "Cancelar": function () {
+                                                        $(this).dialog("close");
+                                                    },
+                                                    "Grabar": function () {
+                                                        $.ajax({
+                                                            url: "Mercados",
+                                                            type: "post",
+                                                            data: {
+                                                                accion: "UPD",
+                                                                idmercado: id,
+                                                                abreviatura: $("#abreviatura_upd").val(),
+                                                                nombre: $("#nombre_upd").val(),
+                                                                iddistrito: $("#iddistrito_upd").val(),
+                                                                direccion: $("#direccion_udp").val(),
+                                                                idestado: $("#idestado_upd").val()
+                                                            },
+                                                            success: function (data) {
+                                                                var ok = data.substring(0, 4);
+
+                                                                if (ok === "!Ok.") {
+                                                                    $("#error_upd").html(data.substring(4, data.length)).show();
+
+                                                                } else {
+                                                                    mercadosCbo();
+                                                                    $("#dupd").dialog("close");
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                 }
                                             });
@@ -242,4 +269,5 @@ function mercadosUpd() {
             }
         });
     }
+
 }
