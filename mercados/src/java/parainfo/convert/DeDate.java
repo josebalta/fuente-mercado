@@ -3,6 +3,8 @@ package parainfo.convert;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -66,5 +68,17 @@ public class DeDate {
 
         return result;
     }
-}
 
+    public static String formato(Object fecha) {
+        String result = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            result = (fecha != null) ? sdf.format(fecha) : result;
+
+        } catch (IllegalArgumentException | NullPointerException e) {
+        }
+
+        return result;
+    }
+}

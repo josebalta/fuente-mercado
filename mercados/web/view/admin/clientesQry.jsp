@@ -52,7 +52,7 @@
                         <td>Vendedor</td>
                         <td>Mercado</td>
                         <td>Direcci&oacute;n</td>
-                        <td>Tel&eacute;fono</td>
+                        <td>Celular</td>
                         <td>Fecha ingreso</td>
                         <td>Fecha cese</td>
                         <td>Estado</td>
@@ -107,7 +107,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Tel&eacute;fono</td>
+                            <td>Celular</td>
                             <td>
                                 <input type="text" id="telefono_ins" maxlength="9" style="width: 300px"/>
                             </td>
@@ -167,7 +167,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Tel&eacute;fono</td>
+                            <td>Celular</td>
                             <td>
                                 <input type="text" id="telefono_upd" maxlength="9" style="width: 300px"/>
                             </td>

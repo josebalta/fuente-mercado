@@ -68,7 +68,7 @@ public class DeString {
 
             list = new LinkedList<>();
             for (String ix : id) {
-                Integer x = aInteger(ix);
+                Integer x = aInteger(ix.trim());
 
                 if (x != null) {
                     list.add(x);

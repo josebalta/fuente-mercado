@@ -148,6 +148,7 @@ function clientesIns() {
 }
 
 function clientesDel() {
+
     var ids = [];
 
     $("input[name='idcliente_del']:checked").each(function () {
@@ -193,6 +194,7 @@ function clientesDel() {
             }
         });
     }
+
 }
 
 function clientesUpd() {

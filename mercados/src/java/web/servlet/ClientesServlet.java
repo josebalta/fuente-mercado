@@ -27,6 +27,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import parainfo.convert.DeDate;
 import parainfo.convert.DeString;
 import web.validator.ClientesValidator;
 
@@ -121,8 +122,8 @@ public class ClientesServlet extends HttpServlet {
                             message.append("<td>").append(u[3]).append("</td>");
                             message.append("<td>").append(u[4]).append("</td>");
                             message.append("<td>").append(u[5]).append("</td>");
-                            message.append("<td>").append(sdf.format((Date)u[7])).append("</td>");
-                            message.append("<td>").append(sdf.format((Date)u[6])).append("</td>");
+                            message.append("<td>").append(DeDate.formato(u[6])).append("</td>");
+                            message.append("<td>").append(DeDate.formato(u[7])).append("</td>");
                             message.append("<td colspan=\"2\">").append(u[8]).append("</td>");
                             message.append("<td>").append("<input type=\"checkbox\" name=\"idcliente_del\" value=\" ").append(u[0]).append("\"/>").append("</td>");
                             message.append("<td>").append("<input type=\"radio\" name=\"idcliente_upd\" value=\"").append(u[0]).append("\"/>").append("</td>");
