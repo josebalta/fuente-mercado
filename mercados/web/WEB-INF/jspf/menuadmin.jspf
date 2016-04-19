@@ -21,7 +21,7 @@
         <li class="has-sub">
             <a href='#'><span><span class="menu_izq"><img src="../../images/icons/shape_align_bottom.png"/></span><span> Movimientos </span></span></a>
             <ul>
-                <li><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/tutoriales.png"/></span><span> Ventas</span></a></li>
+                <li><a href='ventasQry.jsp'><span class="menu_izq_sub"><img src="../../images/icons/tutoriales.png"/></span><span> Ventas</span></a></li>
                 <li class='last'><a href='#'><span class="menu_izq_sub"><img src="../../images/icons/tutoriales.png"/></span><span> Cobranzas</span></a></li>
             </ul>
         </li>
