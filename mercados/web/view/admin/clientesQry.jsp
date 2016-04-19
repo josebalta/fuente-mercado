@@ -37,7 +37,7 @@
         </div>
 
         <div class="ui-layout-center" style="padding-top: 30px">
-            <table class="parainfo" style="margin: auto;width: 500px">
+            <table class="parainfo" style="margin: auto;width: 800px">
                 <caption>
                     <div style="float: left">Lista de Clientes</div>
                     <div style="float: right">
@@ -115,13 +115,13 @@
                         <tr>
                             <td>Fecha ingreso</td>
                             <td>
-                                <input type="text" id="fechaingreso_ins" maxlength="9" style="width: 300px"/>
+                                <input type="date" id="fechaingreso_ins" maxlength="9" style="width: 300px"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Fecha cese</td>
                             <td>
-                                <input type="text" id="fechacese_ins" maxlength="9" style="width: 300px"/>
+                                <input type="date" id="fechacese_ins" maxlength="9" style="width: 300px"/>
                             </td>
                         </tr>
                         <tr>
@@ -175,13 +175,13 @@
                         <tr>
                             <td>Fecha ingreso</td>
                             <td>
-                                <input type="text" id="fechaingreso_upd" maxlength="9" style="width: 300px"/>
+                                <input type="date" id="fechaingreso_upd" maxlength="9" style="width: 300px"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Fecha cese</td>
                             <td>
-                                <input type="text" id="fechacese_upd" maxlength="9" style="width: 300px"/>
+                                <input type="date" id="fechacese_upd" maxlength="9" style="width: 300px"/>
                             </td>
                         </tr>
                         <tr>

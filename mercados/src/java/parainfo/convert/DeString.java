@@ -3,6 +3,8 @@ package parainfo.convert;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,18 +56,6 @@ public class DeString {
         return result;
     }
 
-    public static Date aDate(String s) throws ParseException {
-        Date result = null;
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            result = (Date) formatoDelTexto.parse(s);
-
-        } catch (ParseException ex) {
-        }
-
-        return result;
-    }
-
     /**
      * @param _ids cadena == "3,4,7,8,9"
      * @return lista de enteros
@@ -90,5 +80,66 @@ public class DeString {
         }
 
         return list;
+    }
+
+    /**
+     * @param fecha como cadena
+     * @return java.sql.Date
+     */
+    public static Date aDate(String fecha) {
+        Date result = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //dd/MM/yyyy
+        sdf.setLenient(false);
+
+        try {
+            java.util.Date utilDate = sdf.parse(fecha);
+            result = new java.sql.Date(utilDate.getTime());
+
+        } catch (ParseException ex) {
+        }
+
+        return result;
+    }
+
+    /**
+     * @param hora como cadena
+     * @return java.sql.Time
+     */
+    public static Time aTime(String hora) {
+        Time result = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+        sdf.setLenient(false);
+
+        try {
+            java.util.Date uhora = sdf.parse(hora);
+            result = new java.sql.Time(uhora.getTime());
+
+        } catch (ParseException ex) {
+        }
+
+        return result;
+    }
+
+    /**
+     * @param fechahora como cadena
+     * @return java.sql.Timestamp
+     */
+    public static Timestamp aTimestamp(String fechahora) {
+        Timestamp result = null;
+
+        SimpleDateFormat sdf
+                = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+        sdf.setLenient(false);
+
+        try {
+            java.util.Date ufechahora = sdf.parse(fechahora);
+            result = new java.sql.Timestamp(ufechahora.getTime());
+
+        } catch (ParseException ex) {
+        }
+
+        return result;
     }
 }

@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import parainfo.convert.DeDateJava;
 import parainfo.sql.ConectaDb;
 
 /**
@@ -34,7 +33,6 @@ public class DaoClientesImpl implements dao.DaoClientes {
     public List<Object[]> clientesQry(int numpag, int ctasfils) {
         List<Object[]> list = null;
         sql.delete(0, sql.length())
-                //idcliente, idvendedor, nombre, idmercado, direccion, telefono, idestado, fechaingreso, fechacese FROM clientes
                 .append("SELECT ")
                 .append("clientes.idcliente, ")
                 .append("vendedores.nombre, ")
@@ -69,14 +67,14 @@ public class DaoClientesImpl implements dao.DaoClientes {
                     Object[] u = new Object[9];
 
                     u[0] = rs.getInt(1);
-                    u[1] = rs.getInt(2);
+                    u[1] = rs.getString(2);
                     u[2] = rs.getString(3);
-                    u[3] = rs.getInt(4);
+                    u[3] = rs.getString(4);
                     u[4] = rs.getString(5);
                     u[5] = rs.getInt(6);
-                    u[6] = rs.getShort(7);
+                    u[6] = rs.getDate(7);
                     u[7] = rs.getDate(8);
-                    u[8] = rs.getDate(9);
+                    u[8] = rs.getString(9);
 
                     list.add(u);
                 }
@@ -137,8 +135,8 @@ public class DaoClientesImpl implements dao.DaoClientes {
             ps.setString(4, clientes.getDireccion());
             ps.setInt(5, clientes.getTelefono());
             ps.setShort(6, clientes.getIdestado());
-            ps.setDate(7, DeDateJava.aDateSql(clientes.getFechaingreso()));
-            ps.setDate(8, DeDateJava.aDateSql(clientes.getFechacese()));
+            ps.setDate(7, clientes.getFechaingreso());
+            ps.setDate(8, clientes.getFechacese());
 
             int ctos = ps.executeUpdate();
             if (ctos == 0) {
@@ -242,7 +240,7 @@ public class DaoClientesImpl implements dao.DaoClientes {
         sql.delete(0, sql.length())
                 .append("UPDATE clientes ")
                 .append("SET ")
-                .append("idvendedor=?, idmercado=?, nombre=?, direccion=?, telefono=?, estado=?, fechaingreso=?, fechacese=? ")
+                .append("idvendedor=?, idmercado=?, nombre=?, direccion=?, telefono=?, idestado=?, fechaingreso=?, fechacese=? ")
                 .append("WHERE idcliente=?");
 
         try (Connection cn = db.getConnection();
@@ -254,8 +252,8 @@ public class DaoClientesImpl implements dao.DaoClientes {
             ps.setString(4, clientes.getDireccion());
             ps.setInt(5, clientes.getTelefono());
             ps.setShort(6, clientes.getIdestado());
-            ps.setDate(7, DeDateJava.aDateSql(clientes.getFechaingreso()));
-            ps.setDate(8, DeDateJava.aDateSql(clientes.getFechacese()));
+            ps.setDate(7, clientes.getFechaingreso());
+            ps.setDate(8, clientes.getFechacese());
             ps.setInt(9, clientes.getIdcliente());
 
             int ctos = ps.executeUpdate();

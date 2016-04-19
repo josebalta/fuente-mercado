@@ -2,7 +2,7 @@ package web.validator;
 
 import dto.Clientes;
 import java.text.ParseException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -41,20 +41,21 @@ public class ClientesValidator {
             list.add("ID Cliente Incorrecto");
         }
 
-        if (idvendedor == null) {
-            list.add("Seleccione Provincia");
-        }
-
         if ((nombre == null) || (nombre.trim().length() == 0)) {
             list.add("Ingrese nombre");
         }
+        
+        if (idvendedor == null) {
+            list.add("Seleccione Vendedor");
+        }
+
 
         if (idvendedor == null) {
-            list.add("Seleccione Provincia");
+            list.add("Seleccione Mercado");
         }
 
         if (idestado == null) {
-            list.add("Seleccione Zona");
+            list.add("Seleccione Estado");
         }
 
         clientes.setIdcliente(idcliente);

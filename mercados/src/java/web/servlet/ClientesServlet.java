@@ -16,7 +16,9 @@ import dao.impl.DaoMercadosImpl;
 import dto.Clientes;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,17 +113,18 @@ public class ClientesServlet extends HttpServlet {
                     list = daoClientes.clientesQry(numpag, filsXpag);
 
                     if (list != null) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         for (Object[] u : list) {
                             message.append("<tr>");
-                            message.append("<td>").append(u[8]).append("</td>");
-                            message.append("<td>").append(u[7]).append("</td>");
-                            message.append("<td>").append(u[6]).append("</td>");
-                            message.append("<td>").append(u[5]).append("</td>");
-                            message.append("<td>").append(u[4]).append("</td>");
-                            message.append("<td>").append(u[3]).append("</td>");
                             message.append("<td>").append(u[2]).append("</td>");
-                            message.append("<td colspan=\"2\">").append(u[1]).append("</td>");
-                            message.append("<td>").append("<input type=\"checkbox\" name=\"idcliente_del\" value=\"").append(u[0]).append("\"/>").append("</td>");
+                            message.append("<td>").append(u[1]).append("</td>");
+                            message.append("<td>").append(u[3]).append("</td>");
+                            message.append("<td>").append(u[4]).append("</td>");
+                            message.append("<td>").append(u[5]).append("</td>");
+                            message.append("<td>").append(sdf.format((Date)u[7])).append("</td>");
+                            message.append("<td>").append(sdf.format((Date)u[6])).append("</td>");
+                            message.append("<td colspan=\"2\">").append(u[8]).append("</td>");
+                            message.append("<td>").append("<input type=\"checkbox\" name=\"idcliente_del\" value=\" ").append(u[0]).append("\"/>").append("</td>");
                             message.append("<td>").append("<input type=\"radio\" name=\"idcliente_upd\" value=\"").append(u[0]).append("\"/>").append("</td>");
                             message.append("</tr>");
                         }

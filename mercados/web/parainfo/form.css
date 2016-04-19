@@ -2,13 +2,13 @@ form.parainfo {
 
 }
 
-form.parainfo label, form.parainfo input, form.parainfo select, form.parainfo textarea{
+form.parainfo label, form.parainfo input, form.parainfo select, form.parainfo textarea {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
     color: #444;
 }
 
-form.parainfo input[type=text], form.parainfo input[type=password],
+form.parainfo input[type=text], form.parainfo input[type=password], form.parainfo input[type=date],
 form.parainfo textarea, form.parainfo select, form.parainfo button, select.parainfoo{
     padding: 2px 4px;
 }

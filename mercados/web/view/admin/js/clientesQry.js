@@ -80,40 +80,59 @@ function clientesIns() {
                         if (ok === "!Ok.") {
                             $("#msg_server").html(data.substring(4, data.length)).show();
 
-                        } else {
+                        } else { // exito
                             $("#idmercado_ins").html(data);
-                            //
-                            $("#dins").dialog({
-                                modal: true,
-                                width: 460,
-                                buttons: {
-                                    "Cancelar": function () {
-                                        $(this).dialog("close");
-                                    },
-                                    "Grabar": function () {
-                                        $.ajax({
-                                            url: "Clientes",
-                                            type: "post",
-                                            data: {
-                                                accion: "INS",
-                                                idvendedor: $("#idvendedor_ins").val(),
-                                                nombre: $("#nombre_ins").val(),
-                                                idmercado: $("#idmercado_ins").val(),
-                                                direccion: $("#direccion_ins").val(),
-                                                telefono: $("#telefono_ins").val(),
-                                                fechaingreso: $("#fechaingreso_ins").val(),
-                                                fechacese: $("#fechacese_ins").val(),
-                                                idestado: $("#idestado_ins").val()
-                                            },
-                                            success: function (data) {
-                                                var ok = data.substring(0, 4);
 
-                                                if (ok === "!Ok.") {
-                                                    $("#error_ins").html(data.substring(4, data.length)).show();
+                            $.ajax({
+                                url: "Clientes",
+                                type: "post",
+                                data: {
+                                    accion: "ESTADOS_CBO" //,
+                                            //idvendedor: $("#idvendedor_ins").val()
+                                },
+                                success: function (data) {
+                                    var ok = data.substring(0, 4);
 
-                                                } else {
-                                                    $("#dins").dialog("close");
-                                                    clientesCbo();
+                                    if (ok === "!Ok.") {
+                                        $("#msg_server").html(data.substring(4, data.length)).show();
+
+                                    } else {
+                                        $("#idestado_ins").html(data);
+                                        //
+                                        $("#dins").dialog({
+                                            modal: true,
+                                            width: 460,
+                                            buttons: {
+                                                "Cancelar": function () {
+                                                    $(this).dialog("close");
+                                                },
+                                                "Grabar": function () {
+                                                    $.ajax({
+                                                        url: "Clientes",
+                                                        type: "post",
+                                                        data: {
+                                                            accion: "INS",
+                                                            idvendedor: $("#idvendedor_ins").val(),
+                                                            nombre: $("#nombre_ins").val(),
+                                                            idmercado: $("#idmercado_ins").val(),
+                                                            direccion: $("#direccion_ins").val(),
+                                                            telefono: $("#telefono_ins").val(),
+                                                            fechaingreso: $("#fechaingreso_ins").val(),
+                                                            fechacese: $("#fechacese_ins").val(),
+                                                            idestado: $("#idestado_ins").val()
+                                                        },
+                                                        success: function (data) {
+                                                            var ok = data.substring(0, 4);
+
+                                                            if (ok === "!Ok.") {
+                                                                $("#error_ins").html(data.substring(4, data.length)).show();
+
+                                                            } else {
+                                                                $("#dins").dialog("close");
+                                                                clientesCbo();
+                                                            }
+                                                        }
+                                                    });
                                                 }
                                             }
                                         });
@@ -218,60 +237,80 @@ function clientesUpd() {
                                     url: "Clientes",
                                     type: "post",
                                     data: {
-                                        accion: "GET",
-                                        idcliente: id
+                                        accion: "ESTADOS_CBO" //,
+                                                //idvendedor: $("#idvendedor_ins").val()
                                     },
                                     success: function (data) {
                                         var ok = data.substring(0, 4);
-
 
                                         if (ok === "!Ok.") {
                                             $("#msg_server").html(data.substring(4, data.length)).show();
 
                                         } else {
-                                            var dato = data.split("%%%");
+                                            $("#idestado_upd").html(data);
+                                            //
+                                            $.ajax({
+                                                url: "Clientes",
+                                                type: "post",
+                                                data: {
+                                                    accion: "GET",
+                                                    idcliente: id
+                                                },
+                                                success: function (data) {
+                                                    var ok = data.substring(0, 4);
 
-                                            $("#idvendedor_upd").val(dato[0]);
-                                            $("#nombre_upd").val(dato[1]);
-                                            $("#idmercado_upd").val(dato[2]);
-                                            $("#direccion_upd").val(dato[3]);
-                                            $("#telefono_upd").val(dato[4]);
-                                            $("#fechaingreso_upd").val(dato[5]);
-                                            $("#fechacese_upd").val(dato[6]);
-                                            $("#idestado_upd").val(dato[7]);
 
-                                            $("#dupd").dialog({
-                                                modal: true,
-                                                width: 460,
-                                                buttons: {
-                                                    "Cancelar": function () {
-                                                        $(this).dialog("close");
-                                                    },
-                                                    "Grabar": function () {
-                                                        $.ajax({
-                                                            url: "Clientes",
-                                                            type: "post",
-                                                            data: {
-                                                                accion: "UPD",
-                                                                idcliente: id,
-                                                                idvendedor: $("#idvendedor_upd").val(),
-                                                                nombre: $("#nombre_upd").val(),
-                                                                idmercado: $("#idmercado_upd").val(),
-                                                                direccion: $("#direccion_upd").val(),
-                                                                telefono: $("#telefono_upd").val(),
-                                                                fechaingreso: $("#fechaingreso_upd").val(),
-                                                                fechacese: $("#fechacese_upd").val(),
-                                                                idestado: $("#idestado_upd").val()
-                                                            },
-                                                            success: function (data) {
-                                                                var ok = data.substring(0, 4);
+                                                    if (ok === "!Ok.") {
+                                                        $("#msg_server").html(data.substring(4, data.length)).show();
 
-                                                                if (ok === "!Ok.") {
-                                                                    $("#error_upd").html(data.substring(4, data.length)).show();
+                                                    } else {
+                                                        var dato = data.split("%%%");
 
-                                                                } else {
-                                                                    clientesCbo();
-                                                                    $("#dupd").dialog("close");
+                                                        $("#idvendedor_upd").val(dato[0]);
+                                                        $("#nombre_upd").val(dato[1]);
+                                                        $("#idmercado_upd").val(dato[2]);
+                                                        $("#direccion_upd").val(dato[3]);
+                                                        $("#telefono_upd").val(dato[4]);
+                                                        $("#fechaingreso_upd").val(dato[5]);
+                                                        $("#fechacese_upd").val(dato[6]);
+                                                        $("#idestado_upd").val(dato[7]);
+
+                                                        $("#error_upd").html("").hide();
+                                                        $("#dupd").dialog({
+                                                            modal: true,
+                                                            width: 460,
+                                                            buttons: {
+                                                                "Cancelar": function () {
+                                                                    $(this).dialog("close");
+                                                                },
+                                                                "Grabar": function () {
+                                                                    $.ajax({
+                                                                        url: "Clientes",
+                                                                        type: "post",
+                                                                        data: {
+                                                                            accion: "UPD",
+                                                                            idcliente: id,
+                                                                            idvendedor: $("#idvendedor_upd").val(),
+                                                                            nombre: $("#nombre_upd").val(),
+                                                                            idmercado: $("#idmercado_upd").val(),
+                                                                            direccion: $("#direccion_upd").val(),
+                                                                            telefono: $("#telefono_upd").val(),
+                                                                            fechaingreso: $("#fechaingreso_upd").val(),
+                                                                            fechacese: $("#fechacese_upd").val(),
+                                                                            idestado: $("#idestado_upd").val()
+                                                                        },
+                                                                        success: function (data) {
+                                                                            var ok = data.substring(0, 4);
+
+                                                                            if (ok === "!Ok.") {
+                                                                                $("#error_upd").html(data.substring(4, data.length)).show();
+
+                                                                            } else {
+                                                                                clientesCbo();
+                                                                                $("#dupd").dialog("close");
+                                                                            }
+                                                                        }
+                                                                    });
                                                                 }
                                                             }
                                                         });
@@ -281,6 +320,8 @@ function clientesUpd() {
                                         }
                                     }
                                 });
+
+
                             }
                         }
                     });
