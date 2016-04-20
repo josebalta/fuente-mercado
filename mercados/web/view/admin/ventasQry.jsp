@@ -53,7 +53,7 @@
                             </td>
                             <td>Fecha</td>
                             <td>
-                                <input type="date" id="fecha_ins" maxlength="9" style="width: 200px"/>
+                                <input type="text" id="fecha_ins" maxlength="9" style="width: 200px"/>
                             </td>
                         </tr>
                         <tr>
